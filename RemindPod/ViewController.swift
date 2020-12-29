@@ -11,6 +11,7 @@ import SwiftOSC
 import AVFoundation
 import UserNotifications
 
+//Adding a comment here to see if it syncs up to remote repo
 var player: AVAudioPlayer?
 var notifying = false
 var connected = false
