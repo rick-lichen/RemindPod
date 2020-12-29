@@ -1,11 +1,9 @@
-# M1-AirPodOSC
+# RemindPod
 
 ### Description
-Initial OSC transmitter for Apple AirPods Pro or any other device supported by [CoreMotion's Headphone Motion Manager](https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager).
+iPhone app using AirPod Pro's motion API to ensure better head posture when working. Includes a timer for breaks.
 
-Use this to utilize direct headtracking with [Mach1 Spatial System](https://www.mach1.tech/spatial-system): [M1-Monitor](https://www.mach1.tech/spatial-system#monitor) plugin while mixing (or reviewing) spatial audio content.
-
-For more information about the Mach1 Spatial framework and using it to create your own spatial audio pipeline and content handling please visit the Mach1 Spatial SDK repo: https://github.com/Mach1Studios/m1-sdk
+Uses Mach1 Studio's Spatial framework: https://github.com/Mach1Studios/m1-sdk
 
 ### Setup
  - run `pod install`
