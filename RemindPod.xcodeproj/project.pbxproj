@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A44E59762514033700EA3A5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E59752514033700EA3A5E /* AppDelegate.swift */; };
+		A44E59782514033700EA3A5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E59772514033700EA3A5E /* SceneDelegate.swift */; };
+		A44E597A2514033700EA3A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E59792514033700EA3A5E /* ViewController.swift */; };
+		A44E597D2514033700EA3A5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44E597B2514033700EA3A5E /* Main.storyboard */; };
+		A44E597F2514033800EA3A5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E597E2514033800EA3A5E /* Assets.xcassets */; };
+		A44E59822514033800EA3A5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44E59802514033800EA3A5E /* LaunchScreen.storyboard */; };
+		B80DAB5B2596EEDD00777CEF /* breaktimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DAB5A2596EEDD00777CEF /* breaktimeViewController.swift */; };
+		B8730D452598E8DD00FAD6CA /* timer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8730D442598E8DD00FAD6CA /* timer.mp3 */; };
+		B8BE2E7925953E85004AACA4 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8BE2E7825953E85004AACA4 /* alert.mp3 */; };
+		DED87A91C8CDF266ECCA924D /* Pods_RemindPod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0B740C7EAEB13BFB49901 /* Pods_RemindPod.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1FEF3F041894BD6801544BC4 /* Pods-M1-AirPodOSC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-M1-AirPodOSC.debug.xcconfig"; path = "Target Support Files/Pods-M1-AirPodOSC/Pods-M1-AirPodOSC.debug.xcconfig"; sourceTree = "<group>"; };
+		3CC629D0A73C7C6107D8788C /* Pods-M1-AirPodOSC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-M1-AirPodOSC.release.xcconfig"; path = "Target Support Files/Pods-M1-AirPodOSC/Pods-M1-AirPodOSC.release.xcconfig"; sourceTree = "<group>"; };
+		46C0B740C7EAEB13BFB49901 /* Pods_RemindPod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemindPod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D39890337D12F7386A919D /* Pods-RemindPod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemindPod.debug.xcconfig"; path = "Target Support Files/Pods-RemindPod/Pods-RemindPod.debug.xcconfig"; sourceTree = "<group>"; };
+		A44E59722514033700EA3A5E /* RemindPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemindPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A44E59752514033700EA3A5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A44E59772514033700EA3A5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A44E59792514033700EA3A5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A44E597C2514033700EA3A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A44E597E2514033800EA3A5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A44E59812514033800EA3A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A44E59832514033800EA3A5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A44E59B025140F2600EA3A5E /* M1-AirPodOSC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "M1-AirPodOSC.entitlements"; sourceTree = "<group>"; };
+		B80DAB5A2596EEDD00777CEF /* breaktimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breaktimeViewController.swift; sourceTree = "<group>"; };
+		B8730D442598E8DD00FAD6CA /* timer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = timer.mp3; sourceTree = "<group>"; };
+		B8BE2E7825953E85004AACA4 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
+		F56E8E466A9629930735E3CF /* Pods-RemindPod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemindPod.release.xcconfig"; path = "Target Support Files/Pods-RemindPod/Pods-RemindPod.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A44E596F2514033700EA3A5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DED87A91C8CDF266ECCA924D /* Pods_RemindPod.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A17BE773BE694586CC084F26 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1FEF3F041894BD6801544BC4 /* Pods-M1-AirPodOSC.debug.xcconfig */,
+				3CC629D0A73C7C6107D8788C /* Pods-M1-AirPodOSC.release.xcconfig */,
+				90D39890337D12F7386A919D /* Pods-RemindPod.debug.xcconfig */,
+				F56E8E466A9629930735E3CF /* Pods-RemindPod.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A44E59692514033600EA3A5E = {
+			isa = PBXGroup;
+			children = (
+				A44E59742514033700EA3A5E /* RemindPod */,
+				A44E59732514033700EA3A5E /* Products */,
+				A17BE773BE694586CC084F26 /* Pods */,
+				F57DB634C62ADC66E3BA0DB4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A44E59732514033700EA3A5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A44E59722514033700EA3A5E /* RemindPod.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A44E59742514033700EA3A5E /* RemindPod */ = {
+			isa = PBXGroup;
+			children = (
+				A44E59B025140F2600EA3A5E /* M1-AirPodOSC.entitlements */,
+				A44E59752514033700EA3A5E /* AppDelegate.swift */,
+				A44E59772514033700EA3A5E /* SceneDelegate.swift */,
+				A44E59792514033700EA3A5E /* ViewController.swift */,
+				B80DAB5A2596EEDD00777CEF /* breaktimeViewController.swift */,
+				A44E597B2514033700EA3A5E /* Main.storyboard */,
+				A44E597E2514033800EA3A5E /* Assets.xcassets */,
+				B8BE2E7825953E85004AACA4 /* alert.mp3 */,
+				B8730D442598E8DD00FAD6CA /* timer.mp3 */,
+				A44E59802514033800EA3A5E /* LaunchScreen.storyboard */,
+				A44E59832514033800EA3A5E /* Info.plist */,
+			);
+			path = RemindPod;
+			sourceTree = "<group>";
+		};
+		F57DB634C62ADC66E3BA0DB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46C0B740C7EAEB13BFB49901 /* Pods_RemindPod.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A44E59712514033700EA3A5E /* RemindPod */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A44E59862514033800EA3A5E /* Build configuration list for PBXNativeTarget "RemindPod" */;
+			buildPhases = (
+				2E9C36825A5D1872A10A29AB /* [CP] Check Pods Manifest.lock */,
+				A44E596E2514033700EA3A5E /* Sources */,
+				A44E596F2514033700EA3A5E /* Frameworks */,
+				A44E59702514033700EA3A5E /* Resources */,
+				5C95177B2DDC8C6589DDFF65 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemindPod;
+			productName = "M1-AirPodOSC";
+			productReference = A44E59722514033700EA3A5E /* RemindPod.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A44E596A2514033600EA3A5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					A44E59712514033700EA3A5E = {
+						CreatedOnToolsVersion = 12.0;
+					};
+				};
+			};
+			buildConfigurationList = A44E596D2514033600EA3A5E /* Build configuration list for PBXProject "RemindPod" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A44E59692514033600EA3A5E;
+			productRefGroup = A44E59732514033700EA3A5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A44E59712514033700EA3A5E /* RemindPod */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A44E59702514033700EA3A5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A44E59822514033800EA3A5E /* LaunchScreen.storyboard in Resources */,
+				A44E597F2514033800EA3A5E /* Assets.xcassets in Resources */,
+				A44E597D2514033700EA3A5E /* Main.storyboard in Resources */,
+				B8730D452598E8DD00FAD6CA /* timer.mp3 in Resources */,
+				B8BE2E7925953E85004AACA4 /* alert.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2E9C36825A5D1872A10A29AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RemindPod-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C95177B2DDC8C6589DDFF65 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemindPod/Pods-RemindPod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemindPod/Pods-RemindPod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RemindPod/Pods-RemindPod-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A44E596E2514033700EA3A5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A44E597A2514033700EA3A5E /* ViewController.swift in Sources */,
+				A44E59762514033700EA3A5E /* AppDelegate.swift in Sources */,
+				A44E59782514033700EA3A5E /* SceneDelegate.swift in Sources */,
+				B80DAB5B2596EEDD00777CEF /* breaktimeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A44E597B2514033700EA3A5E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E597C2514033700EA3A5E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A44E59802514033800EA3A5E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E59812514033800EA3A5E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A44E59842514033800EA3A5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A44E59852514033800EA3A5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A44E59872514033800EA3A5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90D39890337D12F7386A919D /* Pods-RemindPod.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "RemindPod/M1-AirPodOSC.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				INFOPLIST_FILE = RemindPod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A44E59882514033800EA3A5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F56E8E466A9629930735E3CF /* Pods-RemindPod.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "RemindPod/M1-AirPodOSC.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				INFOPLIST_FILE = RemindPod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A44E596D2514033600EA3A5E /* Build configuration list for PBXProject "RemindPod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A44E59842514033800EA3A5E /* Debug */,
+				A44E59852514033800EA3A5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A44E59862514033800EA3A5E /* Build configuration list for PBXNativeTarget "RemindPod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A44E59872514033800EA3A5E /* Debug */,
+				A44E59882514033800EA3A5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A44E596A2514033600EA3A5E /* Project object */;
+}
