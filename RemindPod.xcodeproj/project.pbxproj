@@ -14,10 +14,61 @@
 		A44E597F2514033800EA3A5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E597E2514033800EA3A5E /* Assets.xcassets */; };
 		A44E59822514033800EA3A5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44E59802514033800EA3A5E /* LaunchScreen.storyboard */; };
 		B80DAB5B2596EEDD00777CEF /* breaktimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DAB5A2596EEDD00777CEF /* breaktimeViewController.swift */; };
+		B81BAB5D259BA23000D16E08 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81BAB5B259BA23000D16E08 /* Interface.storyboard */; };
+		B81BAB5F259BA23300D16E08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81BAB5E259BA23300D16E08 /* Assets.xcassets */; };
+		B81BAB66259BA23300D16E08 /* RemindPodWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B81BAB65259BA23300D16E08 /* RemindPodWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B81BAB6B259BA23300D16E08 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81BAB6A259BA23300D16E08 /* InterfaceController.swift */; };
+		B81BAB6D259BA23300D16E08 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81BAB6C259BA23300D16E08 /* ExtensionDelegate.swift */; };
+		B81BAB6F259BA23300D16E08 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81BAB6E259BA23300D16E08 /* NotificationController.swift */; };
+		B81BAB71259BA23300D16E08 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81BAB70259BA23300D16E08 /* ComplicationController.swift */; };
+		B81BAB73259BA23400D16E08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81BAB72259BA23400D16E08 /* Assets.xcassets */; };
+		B81BAB78259BA23400D16E08 /* RemindPodWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B81BAB59259BA23000D16E08 /* RemindPodWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B8730D452598E8DD00FAD6CA /* timer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8730D442598E8DD00FAD6CA /* timer.mp3 */; };
 		B8BE2E7925953E85004AACA4 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8BE2E7825953E85004AACA4 /* alert.mp3 */; };
 		DED87A91C8CDF266ECCA924D /* Pods_RemindPod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0B740C7EAEB13BFB49901 /* Pods_RemindPod.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B81BAB67259BA23300D16E08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A44E596A2514033600EA3A5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B81BAB64259BA23300D16E08;
+			remoteInfo = "RemindPodWatch Extension";
+		};
+		B81BAB76259BA23400D16E08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A44E596A2514033600EA3A5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B81BAB58259BA23000D16E08;
+			remoteInfo = RemindPodWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B81BAB79259BA23400D16E08 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B81BAB78259BA23400D16E08 /* RemindPodWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B81BAB7C259BA23400D16E08 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B81BAB66259BA23300D16E08 /* RemindPodWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1FEF3F041894BD6801544BC4 /* Pods-M1-AirPodOSC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-M1-AirPodOSC.debug.xcconfig"; path = "Target Support Files/Pods-M1-AirPodOSC/Pods-M1-AirPodOSC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -34,6 +85,18 @@
 		A44E59832514033800EA3A5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A44E59B025140F2600EA3A5E /* M1-AirPodOSC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "M1-AirPodOSC.entitlements"; sourceTree = "<group>"; };
 		B80DAB5A2596EEDD00777CEF /* breaktimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breaktimeViewController.swift; sourceTree = "<group>"; };
+		B81BAB59259BA23000D16E08 /* RemindPodWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemindPodWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81BAB5C259BA23000D16E08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		B81BAB5E259BA23300D16E08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B81BAB60259BA23300D16E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B81BAB65259BA23300D16E08 /* RemindPodWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RemindPodWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81BAB6A259BA23300D16E08 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		B81BAB6C259BA23300D16E08 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		B81BAB6E259BA23300D16E08 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		B81BAB70259BA23300D16E08 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		B81BAB72259BA23400D16E08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B81BAB74259BA23400D16E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B81BAB75259BA23400D16E08 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		B8730D442598E8DD00FAD6CA /* timer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = timer.mp3; sourceTree = "<group>"; };
 		B8BE2E7825953E85004AACA4 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		F56E8E466A9629930735E3CF /* Pods-RemindPod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemindPod.release.xcconfig"; path = "Target Support Files/Pods-RemindPod/Pods-RemindPod.release.xcconfig"; sourceTree = "<group>"; };
@@ -45,6 +108,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DED87A91C8CDF266ECCA924D /* Pods_RemindPod.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B81BAB62259BA23300D16E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				A44E59742514033700EA3A5E /* RemindPod */,
+				B81BAB5A259BA23000D16E08 /* RemindPodWatch */,
+				B81BAB69259BA23300D16E08 /* RemindPodWatch Extension */,
 				A44E59732514033700EA3A5E /* Products */,
 				A17BE773BE694586CC084F26 /* Pods */,
 				F57DB634C62ADC66E3BA0DB4 /* Frameworks */,
@@ -76,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				A44E59722514033700EA3A5E /* RemindPod.app */,
+				B81BAB59259BA23000D16E08 /* RemindPodWatch.app */,
+				B81BAB65259BA23300D16E08 /* RemindPodWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +172,30 @@
 			path = RemindPod;
 			sourceTree = "<group>";
 		};
+		B81BAB5A259BA23000D16E08 /* RemindPodWatch */ = {
+			isa = PBXGroup;
+			children = (
+				B81BAB5B259BA23000D16E08 /* Interface.storyboard */,
+				B81BAB5E259BA23300D16E08 /* Assets.xcassets */,
+				B81BAB60259BA23300D16E08 /* Info.plist */,
+			);
+			path = RemindPodWatch;
+			sourceTree = "<group>";
+		};
+		B81BAB69259BA23300D16E08 /* RemindPodWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B81BAB6A259BA23300D16E08 /* InterfaceController.swift */,
+				B81BAB6C259BA23300D16E08 /* ExtensionDelegate.swift */,
+				B81BAB6E259BA23300D16E08 /* NotificationController.swift */,
+				B81BAB70259BA23300D16E08 /* ComplicationController.swift */,
+				B81BAB72259BA23400D16E08 /* Assets.xcassets */,
+				B81BAB74259BA23400D16E08 /* Info.plist */,
+				B81BAB75259BA23400D16E08 /* PushNotificationPayload.apns */,
+			);
+			path = "RemindPodWatch Extension";
+			sourceTree = "<group>";
+		};
 		F57DB634C62ADC66E3BA0DB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,15 +216,51 @@
 				A44E596F2514033700EA3A5E /* Frameworks */,
 				A44E59702514033700EA3A5E /* Resources */,
 				5C95177B2DDC8C6589DDFF65 /* [CP] Embed Pods Frameworks */,
+				B81BAB79259BA23400D16E08 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B81BAB77259BA23400D16E08 /* PBXTargetDependency */,
 			);
 			name = RemindPod;
 			productName = "M1-AirPodOSC";
 			productReference = A44E59722514033700EA3A5E /* RemindPod.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B81BAB58259BA23000D16E08 /* RemindPodWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B81BAB80259BA23400D16E08 /* Build configuration list for PBXNativeTarget "RemindPodWatch" */;
+			buildPhases = (
+				B81BAB57259BA23000D16E08 /* Resources */,
+				B81BAB7C259BA23400D16E08 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B81BAB68259BA23300D16E08 /* PBXTargetDependency */,
+			);
+			name = RemindPodWatch;
+			productName = RemindPodWatch;
+			productReference = B81BAB59259BA23000D16E08 /* RemindPodWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		B81BAB64259BA23300D16E08 /* RemindPodWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B81BAB7F259BA23400D16E08 /* Build configuration list for PBXNativeTarget "RemindPodWatch Extension" */;
+			buildPhases = (
+				B81BAB61259BA23300D16E08 /* Sources */,
+				B81BAB62259BA23300D16E08 /* Frameworks */,
+				B81BAB63259BA23300D16E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RemindPodWatch Extension";
+			productName = "RemindPodWatch Extension";
+			productReference = B81BAB65259BA23300D16E08 /* RemindPodWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -134,11 +268,17 @@
 		A44E596A2514033600EA3A5E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					A44E59712514033700EA3A5E = {
 						CreatedOnToolsVersion = 12.0;
+					};
+					B81BAB58259BA23000D16E08 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					B81BAB64259BA23300D16E08 = {
+						CreatedOnToolsVersion = 12.3;
 					};
 				};
 			};
@@ -156,6 +296,8 @@
 			projectRoot = "";
 			targets = (
 				A44E59712514033700EA3A5E /* RemindPod */,
+				B81BAB58259BA23000D16E08 /* RemindPodWatch */,
+				B81BAB64259BA23300D16E08 /* RemindPodWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -170,6 +312,23 @@
 				A44E597D2514033700EA3A5E /* Main.storyboard in Resources */,
 				B8730D452598E8DD00FAD6CA /* timer.mp3 in Resources */,
 				B8BE2E7925953E85004AACA4 /* alert.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B81BAB57259BA23000D16E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B81BAB5F259BA23300D16E08 /* Assets.xcassets in Resources */,
+				B81BAB5D259BA23000D16E08 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B81BAB63259BA23300D16E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B81BAB73259BA23400D16E08 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +388,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B81BAB61259BA23300D16E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B81BAB6F259BA23300D16E08 /* NotificationController.swift in Sources */,
+				B81BAB71259BA23300D16E08 /* ComplicationController.swift in Sources */,
+				B81BAB6D259BA23300D16E08 /* ExtensionDelegate.swift in Sources */,
+				B81BAB6B259BA23300D16E08 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B81BAB68259BA23300D16E08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B81BAB64259BA23300D16E08 /* RemindPodWatch Extension */;
+			targetProxy = B81BAB67259BA23300D16E08 /* PBXContainerItemProxy */;
+		};
+		B81BAB77259BA23400D16E08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B81BAB58259BA23000D16E08 /* RemindPodWatch */;
+			targetProxy = B81BAB76259BA23400D16E08 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A44E597B2514033700EA3A5E /* Main.storyboard */ = {
@@ -246,6 +429,14 @@
 				A44E59812514033800EA3A5E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B81BAB5B259BA23000D16E08 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B81BAB5C259BA23000D16E08 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -417,6 +608,90 @@
 			};
 			name = Release;
 		};
+		B81BAB7A259BA23400D16E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				IBSC_MODULE = RemindPodWatch_Extension;
+				INFOPLIST_FILE = RemindPodWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		B81BAB7B259BA23400D16E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				IBSC_MODULE = RemindPodWatch_Extension;
+				INFOPLIST_FILE = RemindPodWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
+		B81BAB7D259BA23400D16E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				INFOPLIST_FILE = "RemindPodWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		B81BAB7E259BA23400D16E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
+				INFOPLIST_FILE = "RemindPodWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RickLiu.AirPodsM1.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -434,6 +709,24 @@
 			buildConfigurations = (
 				A44E59872514033800EA3A5E /* Debug */,
 				A44E59882514033800EA3A5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B81BAB7F259BA23400D16E08 /* Build configuration list for PBXNativeTarget "RemindPodWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B81BAB7D259BA23400D16E08 /* Debug */,
+				B81BAB7E259BA23400D16E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B81BAB80259BA23400D16E08 /* Build configuration list for PBXNativeTarget "RemindPodWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B81BAB7A259BA23400D16E08 /* Debug */,
+				B81BAB7B259BA23400D16E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

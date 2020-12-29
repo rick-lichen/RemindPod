@@ -10,11 +10,13 @@ import CoreMotion
 import SwiftOSC
 import AVFoundation
 import UserNotifications
+import WatchConnectivity
 
 //Adding a comment here to see if it syncs up to remote repo
 var player: AVAudioPlayer?
-var notifying = false
 var connected = false
+var notifying = false
+var tiltTimerStarted = false
 var calibrateAngle = 0.0
 var seconds = 1800
 var prevSeconds = 1800
@@ -22,15 +24,18 @@ var breakSeconds = 120
 var prevBreakSeconds = 120
 var timer = Timer()
 var breakTimer = Timer()
+var tiltTimer = Timer()
 var isFrequency = true
 //Head tracking
 var degreesPitch = 0.0
 var pitchEnabled = false
 
+//Apple watch
+let session = WCSession.default
+
 @available(iOS 14.0, *)
 class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdaptivePresentationControllerDelegate, AVAudioPlayerDelegate
 {
-    
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var connectionMessage: UILabel!
     @IBOutlet weak var pitchValue: UILabel!
@@ -47,7 +52,6 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     @IBAction func calibrate(_ sender: Any) {
         //Setting base angle
         calibrateAngle = degreesPitch
-        print(motionManager.deviceMotion)
     }
     
     //Enable Timer
@@ -57,6 +61,8 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         changeFrequencyButton.isHidden = false
         changeDurationButton.isHidden = false
         enterBreakButton.isHidden = false
+        disableTimerButton.isHidden = false
+        enableBreakButton.isHidden = true
         startTimerFunction()
     }
     @IBAction func disableTimer(_ sender: Any) {
@@ -66,6 +72,8 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         enterBreakButton.isHidden = true
         changeFrequencyButton.isHidden = true
         changeDurationButton.isHidden = true
+        enableBreakButton.isHidden = false
+        disableTimerButton.isHidden = true
     }
     
     //Timer
@@ -87,6 +95,10 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counter), userInfo: nil, repeats: true)
         doneButton.isHidden = true
         timerPicker.isHidden = true
+        //Also start timer on watch by passing in seconds needed for timer
+        if (session.isPaired && session.isWatchAppInstalled){
+            session.sendMessage(["seconds" : seconds], replyHandler: nil, errorHandler: nil)
+        }
     }
     @IBAction func showFrequencyPicker(_ sender: Any) {
         timerPicker.isHidden = false
@@ -203,7 +215,8 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         changeFrequencyButton.isHidden = true
         changeDurationButton.isHidden = true
         calibrateButton.isHidden = true
-
+        disableTimerButton.isHidden = true
+        
         //Prevents device from going to sleep
         UIApplication.shared.isIdleTimerDisabled = true
         
@@ -215,9 +228,6 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             } else{
                 let alertController = UIAlertController(title: "Notification Disabled", message:
                                                             "If you wish to receive updates when your break timer is up, please turn enable notifications in System Preferences!", preferredStyle: .alert)
-//                alertController.addAction(UIAlertAction(title: "Gotcha",
-//                                                        style: UIAlertAction.Style.default,
-//                                                        handler: {(alert: UIAlertAction!) in notifying = false}))
                 self.present(alertController, animated: true, completion: nil)
             }
         }
@@ -231,11 +241,11 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                     degreesPitch = (motion?.attitude.pitch)! * 180 / Double.pi
                     let printTilt = String(format: "%.2f", degreesPitch)
                     self.pitchValue.text = "\(printTilt)º"
-                    if (degreesPitch < calibrateAngle-15.00 && !notifying){
-                        notifying = true
-                        self.showTiltAlert()
-                        self.playSound("alert")
-                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)    //Vibrates as well
+                    if (degreesPitch < calibrateAngle-15.00 && !notifying && !tiltTimerStarted){
+                        //Timer to see if user continues to tilt head forward
+                        print("starting timer")
+                        tiltTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(ViewController.stillTilting), userInfo: nil, repeats: false)
+                        tiltTimerStarted = true
                     }
                 }
             }
@@ -245,7 +255,23 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
+        //Watch
+        
+        
     }
+    //Check if user's head is still tilted after 3 seconds (avoid quick glancing downs)
+    @objc func stillTilting(){
+        print("timer expired")
+        if (degreesPitch < calibrateAngle - 15.00 && !notifying){
+            print("notifying")
+            notifying = true
+            self.showTiltAlert()
+            self.playSound("alert")
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)    //Vibrates as well
+        }
+        tiltTimerStarted = false
+    }
+    
     @objc func appMovedToBackground() {
         //Save current date
         let defaults = UserDefaults.standard
@@ -335,7 +361,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     }
     func playSound(_ name: String) {
         guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else { return }
-
+        
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient, mode: .default, options: .duckOthers)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -362,7 +388,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                 notifying = false
             }
         }
-
     }
+  
 }
 
