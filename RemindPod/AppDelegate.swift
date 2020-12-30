@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
         
     }
-    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedWatch"), object:
+                                            self, userInfo: message)
+    }
 
 
 

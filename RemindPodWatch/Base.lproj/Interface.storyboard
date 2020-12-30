@@ -11,10 +11,17 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="RemindPodWatch" customModuleProvider="target">
                     <items>
-                        <timer width="127" height="107" alignment="left" id="RQY-5C-iAa"/>
+                        <label width="136" height="29" alignment="left" text="Time Until Break" textAlignment="center" id="I9k-Sx-hTl">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <timer width="127" height="107" alignment="left" textAlignment="center" id="RQY-5C-iAa">
+                            <color key="textColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                        </timer>
                     </items>
                     <connections>
-                        <outlet property="breakTimeLabel" destination="RQY-5C-iAa" id="dik-z9-9WI"/>
+                        <outlet property="textLabel" destination="I9k-Sx-hTl" id="wID-RD-k6I"/>
+                        <outlet property="timer" destination="RQY-5C-iAa" id="dik-z9-9WI"/>
                     </connections>
                 </controller>
             </objects>

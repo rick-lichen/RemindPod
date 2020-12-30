@@ -17,6 +17,8 @@ var player: AVAudioPlayer?
 var connected = false
 var notifying = false
 var tiltTimerStarted = false
+var enteredBreak = false
+var pauseWatch = false
 var calibrateAngle = 0.0
 var seconds = 1800
 var prevSeconds = 1800
@@ -56,6 +58,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     
     //Enable Timer
     @IBAction func enableTimer(_ sender: Any) {
+        seconds = 1800 //Random number to make sure breaktime doesn't get enterred 
         timeRemainingHeader.isHidden = false
         timerLabel.isHidden = false
         changeFrequencyButton.isHidden = false
@@ -74,6 +77,9 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         changeDurationButton.isHidden = true
         enableBreakButton.isHidden = false
         disableTimerButton.isHidden = true
+        pauseWatch = true
+        seconds = 0
+        updateWatch()
     }
     
     //Timer
@@ -90,15 +96,17 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             doneButton.isHidden = true
             timerPicker.isHidden = true
         }
+        //Unpause watch
+        pauseWatch = false
+        updateWatch()
     }
     func startTimerFunction(){
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counter), userInfo: nil, repeats: true)
         doneButton.isHidden = true
         timerPicker.isHidden = true
         //Also start timer on watch by passing in seconds needed for timer
-        if (session.isPaired && session.isWatchAppInstalled){
-            session.sendMessage(["seconds" : seconds], replyHandler: nil, errorHandler: nil)
-        }
+        enteredBreak = false
+        updateWatch()
     }
     @IBAction func showFrequencyPicker(_ sender: Any) {
         timerPicker.isHidden = false
@@ -107,6 +115,9 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         timer.isValid ? timer.invalidate() : nil
         //set timer selection to previous selected time
         timerPicker.countDownDuration = TimeInterval(prevSeconds)
+        //Pause watch
+        pauseWatch = true
+        updateWatch()
     }
     @IBAction func showDurationPicker(_ sender: Any) {
         timerPicker.isHidden = false
@@ -165,6 +176,13 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         pitchEnabled = false
         //Play sound
         playSound("timer")
+        
+        //Userdefaults, save the time at which we enterred break, in case watch requests update during break
+        let defaults = UserDefaults.standard
+        defaults.setValue(Date(), forKey: "enterBreak")
+        //Set enteredbreak = true for watch
+        enteredBreak = true
+        updateWatch()
     }
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         //When break time and user swipes to dismiss, start timer again
@@ -255,9 +273,15 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
-        //Watch
+        //Receive update requests from watch
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedWatch(info:)), name: NSNotification.Name(rawValue: "receivedWatch"), object: nil)
         
-        
+    }
+    @objc func receivedWatch(info: Notification){
+        let message = info.userInfo!
+        if ((message["update"]) as! Bool){
+            updateWatch()
+        }
     }
     //Check if user's head is still tilted after 3 seconds (avoid quick glancing downs)
     @objc func stillTilting(){
@@ -387,6 +411,28 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             self.dismiss(animated: true) {
                 notifying = false
             }
+        }
+    }
+    func updateWatch(){
+        if (session.isPaired && session.isWatchAppInstalled && session.isReachable){
+            var secondsSend = 0
+            if (enteredBreak){
+                let defaults = UserDefaults.standard
+                let (h,m,s) = getTimeDifference(startDate: defaults.object(forKey: "enterBreak") as! Date)
+                let elapsedSeconds = (h*60+m)*60+s
+                secondsSend = breakSeconds - elapsedSeconds
+            } else{
+                if (!timer.isValid){
+                    //If timer hasn't started yet
+                    secondsSend = 0
+                    pauseWatch = true
+                } else{
+                    secondsSend = seconds
+                    pauseWatch = false
+                }
+            }
+            print("sending message")
+            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch], replyHandler: nil, errorHandler: nil)
         }
     }
   
