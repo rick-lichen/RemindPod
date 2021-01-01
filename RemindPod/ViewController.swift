@@ -18,7 +18,7 @@ var connected = false
 var notifying = false
 var tiltTimerStarted = false
 var enteredBreak = false
-var pauseWatch = false
+var pauseWatch = true
 var calibrateAngle = 0.0
 var seconds = 1800
 var prevSeconds = 1800
@@ -34,6 +34,9 @@ var pitchEnabled = false
 
 //Apple watch
 let session = WCSession.default
+var appInForeground = true
+var phoneNeedsUpdate = false
+var timerEnabledOnPhone = false
 
 @available(iOS 14.0, *)
 class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdaptivePresentationControllerDelegate, AVAudioPlayerDelegate
@@ -58,7 +61,9 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     
     //Enable Timer
     @IBAction func enableTimer(_ sender: Any) {
-        seconds = 1800 //Random number to make sure breaktime doesn't get enterred 
+        if (seconds <= 0){
+            seconds = 1800 //Random number to make sure breaktime doesn't get enterred
+        }
         timeRemainingHeader.isHidden = false
         timerLabel.isHidden = false
         changeFrequencyButton.isHidden = false
@@ -66,6 +71,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         enterBreakButton.isHidden = false
         disableTimerButton.isHidden = false
         enableBreakButton.isHidden = true
+        timerEnabledOnPhone = true
         startTimerFunction()
     }
     @IBAction func disableTimer(_ sender: Any) {
@@ -79,6 +85,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         disableTimerButton.isHidden = true
         pauseWatch = true
         seconds = 0
+        timerEnabledOnPhone = false
         updateWatch()
     }
     
@@ -101,6 +108,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         updateWatch()
     }
     func startTimerFunction(){
+        seconds -= 1 //To account for a 1s lag
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counter), userInfo: nil, repeats: true)
         doneButton.isHidden = true
         timerPicker.isHidden = true
@@ -280,7 +288,16 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     @objc func receivedWatch(info: Notification){
         let message = info.userInfo!
         if ((message["update"]) as! Bool){
-            updateWatch()
+            phoneNeedsUpdate = false
+            if ((message["started"] as! Bool) && !timer.isValid && appInForeground){
+                //Watch has started a timer on its own and phone hasn't, match the time on the phone and start timer if app is active
+                seconds = message["seconds"] as! Int
+                DispatchQueue.main.async {
+                    self.enableTimer(self)
+                }
+            } else{
+                updateWatch()
+            }
         }
     }
     //Check if user's head is still tilted after 3 seconds (avoid quick glancing downs)
@@ -297,6 +314,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     }
     
     @objc func appMovedToBackground() {
+        appInForeground = false
         //Save current date
         let defaults = UserDefaults.standard
         defaults.setValue(Date(), forKey: "savedTime")
@@ -325,6 +343,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         }
     }
     @objc func appCameToForeground() {
+        appInForeground = true
         if (timer.isValid){
             //if timer was started, then update time
             if let savedDate = UserDefaults.standard.object(forKey: "savedTime") as? Date {
@@ -351,6 +370,9 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         } else{
             //Clear any saved time
             UserDefaults.standard.removeObject(forKey: "savedTime")
+            //Ask for update from watch to see if watch has started
+            phoneNeedsUpdate = true
+            updateWatch()
         }
         
     }
@@ -432,9 +454,12 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                 }
             }
             print("sending message")
-            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch], replyHandler: nil, errorHandler: nil)
+            print("phoneupdate = \(phoneNeedsUpdate)")
+            print("pauseWatch = \(pauseWatch)")
+            print("seconds = \(secondsSend)")
+            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch, "started" : timerEnabledOnPhone, "phone" : phoneNeedsUpdate], replyHandler: nil, errorHandler: nil)
         }
     }
-  
+    
 }
 

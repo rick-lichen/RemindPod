@@ -11,21 +11,26 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="RemindPodWatch" customModuleProvider="target">
                     <items>
-                        <label width="136" height="29" alignment="left" text="Time Until Break" textAlignment="center" id="I9k-Sx-hTl">
+                        <label width="136" height="29" alignment="center" text="Time Until Break" textAlignment="center" id="I9k-Sx-hTl">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <timer width="127" height="107" alignment="left" textAlignment="center" id="RQY-5C-iAa">
-                            <color key="textColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
-                        </timer>
+                        <label width="136" height="48" alignment="center" text="Label" textAlignment="center" id="udU-A2-ZCD">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
+                        </label>
+                        <button width="1" alignment="center" title="Start Break Timer" id="Zr2-uq-Dxu">
+                            <connections>
+                                <action selector="buttonPressed" destination="AgC-eL-Hgc" id="8Xd-Vu-Z7K"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="textLabel" destination="I9k-Sx-hTl" id="wID-RD-k6I"/>
-                        <outlet property="timer" destination="RQY-5C-iAa" id="dik-z9-9WI"/>
+                        <outlet property="timerLabel" destination="udU-A2-ZCD" id="AaU-Yo-3Yn"/>
+                        <outlet property="watchButton" destination="Zr2-uq-Dxu" id="IPa-qg-kVx"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="329"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
