@@ -108,7 +108,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         updateWatch()
     }
     func startTimerFunction(){
-        seconds -= 1 //To account for a 1s lag
+        //        seconds -= 1 //To account for a 1s lag
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counter), userInfo: nil, repeats: true)
         doneButton.isHidden = true
         timerPicker.isHidden = true
@@ -290,6 +290,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         if ((message["update"]) as! Bool){
             phoneNeedsUpdate = false
             if ((message["started"] as! Bool) && !timer.isValid && appInForeground){
+                print("enabling timer from watch")
                 //Watch has started a timer on its own and phone hasn't, match the time on the phone and start timer if app is active
                 seconds = message["seconds"] as! Int
                 DispatchQueue.main.async {
@@ -297,6 +298,23 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                 }
             } else{
                 updateWatch()
+            }
+        }
+        else {
+            if (message["startTimer"] as! Bool){
+                //If watch wants us to start timer
+                seconds = prevSeconds
+                breakSeconds = prevBreakSeconds
+                DispatchQueue.main.async {
+                    self.startTimerFunction()
+                }
+            }
+            if (message["startBreak"] as! Bool){
+                seconds = prevSeconds
+                breakSeconds = prevBreakSeconds
+                DispatchQueue.main.async {
+                    self.enterBreak(self)
+                }
             }
         }
     }
@@ -456,8 +474,12 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             print("sending message")
             print("phoneupdate = \(phoneNeedsUpdate)")
             print("pauseWatch = \(pauseWatch)")
+            print("enteredBreak = \(enteredBreak)")
             print("seconds = \(secondsSend)")
-            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch, "started" : timerEnabledOnPhone, "phone" : phoneNeedsUpdate], replyHandler: nil, errorHandler: nil)
+            print("started = \(timerEnabledOnPhone)")
+            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch, "started" : timerEnabledOnPhone, "phone" : phoneNeedsUpdate], replyHandler: nil, errorHandler: {(error) -> Void in
+                print((error))
+            })
         }
     }
     

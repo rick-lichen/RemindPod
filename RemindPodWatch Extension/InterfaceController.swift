@@ -20,7 +20,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var actualTimer = Timer() 
     var alreadyBreak = false
     
-    @IBOutlet weak var timerLabel: WKInterfaceLabel!
+    @IBOutlet weak var timerCountDown: WKInterfaceTimer!
     @IBOutlet weak var textLabel: WKInterfaceLabel!
     @IBOutlet weak var watchButton: WKInterfaceButton!
     
@@ -73,7 +73,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
         //Tell phone I'm activating, to send back updates
         if (session.isReachable){
-            session.sendMessage(["update" : true, "started" : timerStarted, "seconds" : seconds], replyHandler: nil, errorHandler: nil)
+            session.sendMessage(["update" : true, "started" : timerStarted, "seconds" : seconds, "startTimer" : false, "startBreak" : false], replyHandler: nil, errorHandler: nil)
         }
         
     }
@@ -84,12 +84,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     @objc func receivedPhone(info: Notification){
+        textLabel.setText("Received from phone")
         let message = info.userInfo!
         print(message)
         if ((message["phone"]) as! Bool){
             //If phone just wants an update
             if (session.isReachable){
-                session.sendMessage(["update" : true, "started" : timerStarted, "seconds" : seconds], replyHandler: nil, errorHandler: nil)
+                session.sendMessage(["update" : true, "started" : timerStarted, "seconds" : seconds, "startTimer" : false, "startBreak" : false], replyHandler: nil, errorHandler: nil)
             }
         } 
         if ((message["pause"]) as! Bool){
@@ -123,7 +124,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func disableTimer(){
         print("disabling timer")
         timerStarted = false
-        timerLabel.setText("00:00:00")
+        timerCountDown.stop()
         actualTimer.isValid ? actualTimer.invalidate() : nil
         watchButton.setTitle("Start Break Timer")
     }
@@ -135,55 +136,70 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         print("timer is currently \(actualTimer.isValid)")
         actualTimer.isValid ? actualTimer.invalidate() : nil
         //Display timer
-        timerLabel.setText("\(seconds)")
+        var countDownDate = Date()
+        countDownDate.addTimeInterval(seconds)
+        timerCountDown.setDate(countDownDate)
+        timerCountDown.start()
         textLabel.setText("Time Until Break")
         //Actual timer
-        actualTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(InterfaceController.counter), userInfo: nil, repeats: true)
+        actualTimer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(InterfaceController.timerDone), userInfo: nil, repeats: false)
         alreadyBreak = false
         timerStarted = true
         watchButton.setTitle("Enter Break")
         print("at end of starttimer, actualtimer is \(actualTimer.isValid)")
     }
     
-    @objc func counter(){
-        print("in counter")
-        if (alreadyBreak){
-            //counter for break time
-            if (breakSeconds > 0){
-                breakSeconds -= 1.0
-                let (h, m, s) =  secondsToHoursMinutesSeconds(seconds: Int(breakSeconds))
-                timerLabel.setText("\(h)\(m)\(s)")
-            } else{
-                //Reset seconds
-                seconds = prevSeconds
-                startTimer()
-            }
-        } else{
-            //Normal timer
-            if (seconds > 0){
-                seconds -= 1.0
-                let (h, m, s) =  secondsToHoursMinutesSeconds(seconds: Int(seconds))
-                timerLabel.setText("\(h)\(m)\(s)")
-            } else {
-                //If seconds expired – time for break!
-                //Set breakseconds to previous
-                breakSeconds = prevBreakSeconds
-                enterBreak()
-            }
-        }
+    @objc func timerDone(){
+        //Timer done, enter break
+        enterBreak()
     }
+//    @objc func counter(){
+//        print("in counter")
+//        if (alreadyBreak){
+//            //counter for break time
+//            if (breakSeconds > 0){
+//                breakSeconds -= 1.0
+//                let (h, m, s) =  secondsToHoursMinutesSeconds(seconds: Int(breakSeconds))
+//                timerLabel.setText("\(h)\(m)\(s)")
+//            } else{
+//                //Reset seconds
+//                seconds = prevSeconds
+//                startTimer()
+//            }
+//        } else{
+//            //Normal timer
+//            if (seconds > 0){
+//                seconds -= 1.0
+//                let (h, m, s) =  secondsToHoursMinutesSeconds(seconds: Int(seconds))
+//                timerLabel.setText("\(h)\(m)\(s)")
+//            } else {
+//                //If seconds expired – time for break!
+//                //Set breakseconds to previous
+//                breakSeconds = prevBreakSeconds
+//                enterBreak()
+//            }
+//        }
+//    }
     @objc func enterBreak(){
         //Invalidate any timers
         actualTimer.isValid ? actualTimer.invalidate() : nil
         //Display timer
         textLabel.setText("Break Time!")
+        var countDownDate = Date()
+        countDownDate.addTimeInterval(breakSeconds)
+        timerCountDown.setDate(countDownDate)
+        timerCountDown.start()
         //Vibrate watch
         WKInterfaceDevice.current().play(.success)
         //Actual timer
-        actualTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(InterfaceController.counter), userInfo: nil, repeats: true)
+        actualTimer = Timer.scheduledTimer(timeInterval: breakSeconds, target: self, selector: #selector(InterfaceController.breakDone), userInfo: nil, repeats: false)
         timerStarted = true
         alreadyBreak = true
         watchButton.setTitle("Skip Break")
+    }
+    
+    @objc func breakDone(){
+        startTimer()
     }
     
     @IBAction func buttonPressed() {
@@ -192,6 +208,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             //Reset seconds
             seconds = prevSeconds
             startTimer()
+            if (session.isReachable){
+                session.sendMessage(["update" : true, "started" : timerStarted, "seconds" : seconds, "startTimer" : true, "startBreak" : false], replyHandler: nil, errorHandler: nil)
+            }
         } else {
             //Timer has started
             if (alreadyBreak){
@@ -200,11 +219,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 //Reset seconds
                 seconds = prevSeconds
                 startTimer()
+                if (session.isReachable){
+                    session.sendMessage(["update" : false, "started" : timerStarted, "seconds" : seconds, "startTimer" : true, "startBreak" : false], replyHandler: nil, errorHandler: nil)
+                }
             } else {
                 //Pressing here means to enter break
                 //Set breakseconds to previous
                 breakSeconds = prevBreakSeconds
                 enterBreak()
+                if (session.isReachable){
+                    session.sendMessage(["update" : false, "started" : timerStarted, "seconds" : seconds, "startTimer" : false, "startBreak" : true], replyHandler: nil, errorHandler: nil)
+                }
             }
         }
     }

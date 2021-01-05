@@ -14,9 +14,9 @@
                         <label width="136" height="29" alignment="center" text="Time Until Break" textAlignment="center" id="I9k-Sx-hTl">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <label width="136" height="48" alignment="center" text="Label" textAlignment="center" id="udU-A2-ZCD">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                        </label>
+                        <timer width="136" height="38" alignment="center" textAlignment="center" id="d9Q-v7-zLj">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                        </timer>
                         <button width="1" alignment="center" title="Start Break Timer" id="Zr2-uq-Dxu">
                             <connections>
                                 <action selector="buttonPressed" destination="AgC-eL-Hgc" id="8Xd-Vu-Z7K"/>
@@ -25,7 +25,7 @@
                     </items>
                     <connections>
                         <outlet property="textLabel" destination="I9k-Sx-hTl" id="wID-RD-k6I"/>
-                        <outlet property="timerLabel" destination="udU-A2-ZCD" id="AaU-Yo-3Yn"/>
+                        <outlet property="timerCountDown" destination="d9Q-v7-zLj" id="Ive-6k-uar"/>
                         <outlet property="watchButton" destination="Zr2-uq-Dxu" id="IPa-qg-kVx"/>
                     </connections>
                 </controller>

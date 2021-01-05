@@ -20,9 +20,25 @@ class breaktimeViewController: UIViewController, UIAdaptivePresentationControlle
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        //Watch
+        //Receive update requests from watch
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedWatch(info:)), name: NSNotification.Name(rawValue: "receivedWatch"), object: nil)
     }
     func startTimerFunction(){
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counter), userInfo: nil, repeats: true)
+    }
+    @objc func receivedWatch(info: Notification){
+        let message = info.userInfo!
+        if (message["startTimer"] as! Bool){
+            //If watch wants us to start timer when phone is currently in break, then skip the break
+            timer.invalidate()
+            //Segue back
+            DispatchQueue.main.async {
+                self.onDoneBlock!(true)
+                self.dismiss(animated: true)
+            }
+            
+        }
     }
     @objc func counter(){
         seconds -= 1
