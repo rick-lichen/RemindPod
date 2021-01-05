@@ -357,7 +357,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                 let content = UNMutableNotificationContent()
                 content.title = "Come back!"
                 content.body = "Come back or your session will stop!"
-                content.sou`nd = UNNotificationSound(named: UNNotificationSoundName(rawValue: "timer.mp3"))
+                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "timer.mp3"))
                 
                 //Trigger with timer's seconds
                 let date = Date().addingTimeInterval(TimeInterval(5))
