@@ -331,6 +331,14 @@
                                     <action selector="enterBreak:" destination="CPk-sC-miA" eventType="touchUpInside" id="tLT-F0-Nhd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Y0-Ws-zyp">
+                                <rect key="frame" x="73" y="698" width="241" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Enable Don't Leave Me Mode"/>
+                                <connections>
+                                    <action selector="dontLeavePressed:" destination="CPk-sC-miA" eventType="touchUpInside" id="S57-A9-3iu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aIn-Eh-efc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -343,6 +351,7 @@
                         <outlet property="connectionMessage" destination="JKP-t7-jki" id="5hR-Ra-1bw"/>
                         <outlet property="disableTimerButton" destination="rhx-EU-omZ" id="hZz-4M-E8p"/>
                         <outlet property="doneButton" destination="toq-8Q-OwD" id="ZfL-l8-d7k"/>
+                        <outlet property="dontLeaveButton" destination="0Y0-Ws-zyp" id="4K3-Su-k7p"/>
                         <outlet property="enableBreakButton" destination="EHS-Cs-2qW" id="lcJ-hy-EzA"/>
                         <outlet property="enterBreakButton" destination="d2w-yc-yn1" id="YJ7-Tm-0jM"/>
                         <outlet property="pitchValue" destination="wM0-eM-4wC" id="Gme-lI-6Xj"/>

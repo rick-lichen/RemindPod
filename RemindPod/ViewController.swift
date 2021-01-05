@@ -12,15 +12,10 @@ import AVFoundation
 import UserNotifications
 import WatchConnectivity
 
-//Adding a comment here to see if it syncs up to remote repo
+//Timer
 var player: AVAudioPlayer?
-var connected = false
-var notifying = false
-var tiltTimerStarted = false
 var enteredBreak = false
-var pauseWatch = true
 var disablePressed = false
-var calibrateAngle = 0.0
 var seconds = 1800
 var prevSeconds = 1800
 var breakSeconds = 120
@@ -32,19 +27,30 @@ var isFrequency = true
 //Head tracking
 var degreesPitch = 0.0
 var pitchEnabled = false
+var connected = false
+var notifying = false
+var tiltTimerStarted = false
+var calibrateAngle = 0.0
 
 //Apple watch
 let session = WCSession.default
 var appInForeground = true
 var phoneNeedsUpdate = false
 var timerEnabledOnPhone = false
+var pauseWatch = true
+
+//Don't leave mode
+var dontLeaveMode = false
 
 @available(iOS 14.0, *)
 class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdaptivePresentationControllerDelegate, AVAudioPlayerDelegate
 {
-    @IBOutlet weak var timerLabel: UILabel!
+    //Airpods
     @IBOutlet weak var connectionMessage: UILabel!
     @IBOutlet weak var pitchValue: UILabel!
+    @IBOutlet weak var calibrateButton: UIButton!
+    //Timer
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var timeRemainingHeader: UILabel!
     @IBOutlet weak var timerPicker: UIDatePicker!
     @IBOutlet weak var doneButton: UIButton!
@@ -53,7 +59,22 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
     @IBOutlet weak var changeFrequencyButton: UIButton!
     @IBOutlet weak var changeDurationButton: UIButton!
     @IBOutlet weak var enterBreakButton: UIButton!
-    @IBOutlet weak var calibrateButton: UIButton!
+    //Don't leave mode
+    @IBOutlet weak var dontLeaveButton: UIButton!
+    
+    
+    @IBAction func dontLeavePressed(_ sender: Any) {
+        if (dontLeaveMode){
+            //Turn off
+            dontLeaveMode = false
+            dontLeaveButton.setTitle("Enable Don't Leave Me Mode", for: .normal)
+        } else{
+            //Turn on
+            dontLeaveMode = true
+            dontLeaveButton.setTitle("Disable Don't Leave Me Mode", for: .normal)
+        }
+    }
+    
     
     @IBAction func calibrate(_ sender: Any) {
         //Setting base angle
@@ -199,39 +220,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         //When break time and user swipes to dismiss, start timer again
         breakTimeOver()
     }
-    func showBreakAlert() {
-        let alertController = UIAlertController(title: "Break Time!", message:
-                                                    "Take a break! Stretch and move around :)", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Gotcha",
-                                                style: UIAlertAction.Style.default,
-                                                handler: {(alert: UIAlertAction!) in notifying = false}))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (String, String, String) {
-        //Formatting of timer display
-        var hString = ""
-        var mString = ""
-        var sString = ""
-        let (h,m,s) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-        if (h != 0){
-            if (h < 10){
-                hString = "0\(h) : "
-            } else{
-                hString = "\(h) : "
-            }
-        }
-        if (m < 10){
-            mString = "0\(m) : "
-        } else {
-            mString = "\(m) : "
-        }
-        if (s < 10){
-            sString = "0\(s)"
-        } else {
-            sString = "\(s)"
-        }
-        return (hString, mString, sString)
-    }
+    
     var motionManager: CMHeadphoneMotionManager!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -361,7 +350,33 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             center.add(request) { (error) in
                 //Check error parameter and handle errors
             }
+            //Don't leave me mode
+            if (dontLeaveMode){
+                //Create notification to notify within 10s to come back or else timer will stop
+                //Notification content
+                let content = UNMutableNotificationContent()
+                content.title = "Come back!"
+                content.body = "Come back or your session will stop!"
+                content.sou`nd = UNNotificationSound(named: UNNotificationSoundName(rawValue: "timer.mp3"))
+                
+                //Trigger with timer's seconds
+                let date = Date().addingTimeInterval(TimeInterval(5))
+                let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                
+                //Creating request
+                let uuidString = UUID().uuidString
+                let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+                
+                //Register request
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    //Check error parameter and handle errors
+                }
+                
+            }
         }
+        
     }
     @objc func appCameToForeground() {
         appInForeground = true
@@ -384,7 +399,22 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
                         }
                     }
                 }
+                //Don't leave mode
+                if (dontLeaveMode){
+                    if (elapsedSeconds > 30){
+                        //If left for greater than 30 seconds, fail the session
+                        disableTimer(self)
+                        let alertController = UIAlertController(title: "Session failed :(", message:
+                                                                    "You left the app for too long with Don't Leave Me Mode On! ", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "I won't do it again",
+                                                                style: UIAlertAction.Style.default,
+                                                                handler: {(alert: UIAlertAction!) in notifying = false}))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
             }
+            
+            
             //Also clear any pending notifications
             let center = UNUserNotificationCenter.current()
             center.removeAllPendingNotificationRequests()
@@ -395,13 +425,9 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             phoneNeedsUpdate = true
             updateWatch()
         }
-        
     }
-    func getTimeDifference(startDate: Date) -> (Int, Int, Int) {
-        let difference = Calendar.current.dateComponents([.hour, .minute, .second], from: startDate, to: Date())
-        return (difference.hour!, difference.minute!, difference.second!)
-        
-    }
+    
+    //Helper methods
     func headphoneMotionManagerDidConnect(_ manager: CMHeadphoneMotionManager) {
         print("connect")
         connectionMessage.text = "Airpods Pro Connected"
@@ -417,6 +443,46 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         pitchValue.text = "N/A"
         calibrateButton.isHidden = true
     }
+    
+    func showBreakAlert() {
+        let alertController = UIAlertController(title: "Break Time!", message:
+                                                    "Take a break! Stretch and move around :)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Gotcha",
+                                                style: UIAlertAction.Style.default,
+                                                handler: {(alert: UIAlertAction!) in notifying = false}))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (String, String, String) {
+        //Formatting of timer display
+        var hString = ""
+        var mString = ""
+        var sString = ""
+        let (h,m,s) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        if (h != 0){
+            if (h < 10){
+                hString = "0\(h) : "
+            } else{
+                hString = "\(h) : "
+            }
+        }
+        if (m < 10){
+            mString = "0\(m) : "
+        } else {
+            mString = "\(m) : "
+        }
+        if (s < 10){
+            sString = "0\(s)"
+        } else {
+            sString = "\(s)"
+        }
+        return (hString, mString, sString)
+    }
+    func getTimeDifference(startDate: Date) -> (Int, Int, Int) {
+        let difference = Calendar.current.dateComponents([.hour, .minute, .second], from: startDate, to: Date())
+        return (difference.hour!, difference.minute!, difference.second!)
+        
+    }
+    
     //Show alert when head is tilted forward too much
     func showTiltAlert() {
         let alertController = UIAlertController(title: "Head Tilt", message:
