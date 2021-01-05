@@ -19,6 +19,7 @@ var notifying = false
 var tiltTimerStarted = false
 var enteredBreak = false
 var pauseWatch = true
+var disablePressed = false
 var calibrateAngle = 0.0
 var seconds = 1800
 var prevSeconds = 1800
@@ -72,6 +73,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         disableTimerButton.isHidden = false
         enableBreakButton.isHidden = true
         timerEnabledOnPhone = true
+        disablePressed = false
         startTimerFunction()
     }
     @IBAction func disableTimer(_ sender: Any) {
@@ -86,6 +88,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
         pauseWatch = true
         seconds = 0
         timerEnabledOnPhone = false
+        disablePressed = true
         updateWatch()
     }
     
@@ -477,7 +480,7 @@ class ViewController: UIViewController, CMHeadphoneMotionManagerDelegate, UIAdap
             print("enteredBreak = \(enteredBreak)")
             print("seconds = \(secondsSend)")
             print("started = \(timerEnabledOnPhone)")
-            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch, "started" : timerEnabledOnPhone, "phone" : phoneNeedsUpdate], replyHandler: nil, errorHandler: {(error) -> Void in
+            session.sendMessage(["break" : enteredBreak ,"seconds" : secondsSend, "pause" : pauseWatch, "started" : timerEnabledOnPhone, "phone" : phoneNeedsUpdate, "disable" : disablePressed], replyHandler: nil, errorHandler: {(error) -> Void in
                 print((error))
             })
         }

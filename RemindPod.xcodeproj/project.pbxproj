@@ -653,6 +653,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
 				INFOPLIST_FILE = "RemindPodWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -675,6 +676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Y3WXRH5BKZ;
 				INFOPLIST_FILE = "RemindPodWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

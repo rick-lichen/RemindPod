@@ -84,7 +84,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     @objc func receivedPhone(info: Notification){
-        textLabel.setText("Received from phone")
         let message = info.userInfo!
         print(message)
         if ((message["phone"]) as! Bool){
@@ -95,10 +94,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         } 
         if ((message["pause"]) as! Bool){
             print("pause is true, timerstarted is \(timerStarted)")
-            if (!((message["started"]) as! Bool) && timerStarted){
+            if (!((message["started"]) as! Bool) && timerStarted && !(message["disable"] as! Bool)){
                 //Don't pause timer if we've started already and they haven't
             } else{
                 disableTimer()
+                if (message["disable"] as! Bool){
+                    timerCountDown.setDate(Date())
+                }
             }
         } else{
             if ((message["break"]) as! Bool){
